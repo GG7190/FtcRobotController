@@ -58,6 +58,49 @@ public class RobotHardware extends OpMode {
 
     }
 
+    public double getRightMotors(){
+        return rightFrontMotor.getPower();
+    }
+
+    public double getLeftMotors(){
+        return leftFrontMotor.getPower();
+    }
+
+    public void setRightMotors(double power){
+        rightFrontMotor.setPower(power);
+        rightBackMotor.setPower(power);
+    }
+    public void setLeftMotors(double power){
+        leftFrontMotor.setPower(power);
+        leftBackMotor.setPower(power);
+    }
+
+    public double getCollectorMotor(){
+        return collectorMotor.getPower();
+    }
+
+    public void setCollectorMotor(double power) {
+        collectorMotor.setPower(power);
+    }
+
+    public double getShooterMotor(){
+        return shooterMotor.getPower();
+    }
+
+    public void setShooterMotor(double power){
+        shooterMotor.setPower(power);
+    }
+
+    public double getDeflectorMotor(){
+        return deflectorMotor.getPower();
+    }
+
+    public void setDeflectorMotor(double power){
+        deflectorMotor.setPower(power);
+    }
+
+
+
     @Override public void loop() {
 
     }
