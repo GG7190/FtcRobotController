@@ -51,6 +51,7 @@ public class RobotHardware extends OpMode {
         deflectorMotor = hardwareMap.dcMotor.get("deflector_motor");
 
         //Map hardware for servos
+        servoController = hardwareMap.servoController.get("servo_controller");
         dinoArm1 = hardwareMap.servo.get("servo_1");
         dinoArm2 = hardwareMap.servo.get("servo_2");
         ballChannel = hardwareMap.servo.get("servo_3");
