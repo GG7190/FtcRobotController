@@ -117,6 +117,15 @@ public class RobotHardware extends OpMode {
         dinoArm2.setPosition(DINO_ARM_MIN_RANGE);
     }
 
+    public void openBallChannel() {
+        ballChannel.setPosition(BALL_CHANNEL_MIN_RANGE);
+    }
+
+    public void closeBallChannel() {
+        ballChannel.setPosition(BALL_CHANNEL_MAX_RANGE);
+    }
+
+
     @Override public void loop() {
 
     }
