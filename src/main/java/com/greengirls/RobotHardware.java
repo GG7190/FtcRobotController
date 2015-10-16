@@ -1,9 +1,10 @@
-package com.greengirls.chinaAutonomous;
+package com.greengirls;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.ServoController;
 
 /**
  * Created by Dell User on 10/15/2015.
@@ -14,6 +15,7 @@ public class RobotHardware extends OpMode {
     private Servo dinoArm1;
     private Servo dinoArm2;
     private Servo ballChannel;
+    private ServoController servoController;
 
     //define Motors and MotorControllers
     private DcMotorController rightMotorController;
@@ -56,6 +58,6 @@ public class RobotHardware extends OpMode {
     }
 
     @Override public void loop() {
-        
+
     }
 }
