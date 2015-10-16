@@ -11,6 +11,10 @@ import com.qualcomm.robotcore.hardware.ServoController;
  */
 public class RobotHardware extends OpMode {
 
+    //Set Max and Min values of dino arms
+    final static double DINO_ARM_MIN_RANGE  = 0.20;
+    final static double DINO_ARM_MAX_RANGE  = 0.90;
+
     //define servos
     private Servo dinoArm1;
     private Servo dinoArm2;
@@ -99,7 +103,15 @@ public class RobotHardware extends OpMode {
         deflectorMotor.setPower(power);
     }
 
+    public void openDinoArms(){
+        dinoArm1.setPosition(DINO_ARM_MIN_RANGE);
+        dinoArm2.setPosition(DINO_ARM_MAX_RANGE);
+    }
 
+    public void closeDinoArms(){
+        dinoArm1.setPosition(DINO_ARM_MAX_RANGE);
+        dinoArm2.setPosition(DINO_ARM_MIN_RANGE);
+    }
 
     @Override public void loop() {
 
