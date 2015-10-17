@@ -28,7 +28,7 @@ public class TeleOp extends RobotHardware {
  *   left_stick_x moves the left wheels forward and backward
  *   right_stick_x moves the right wheels forward and backward
  *   right_trigger collects balls
-
+ *   right_trigger spits out balls
  *
  * Controller Two
  *  Left bumper triggers the dino arm servos to open
@@ -37,7 +37,7 @@ public class TeleOp extends RobotHardware {
  *  Pressing Y raises the deflector arm
  *  Pressing A lowers the deflector arm
  *  Holding X shoots
- *   right_bumper spits out balls
+
  */
 
     @Override
@@ -65,15 +65,40 @@ public class TeleOp extends RobotHardware {
         if (gamepad2.y) {
             openDeflector();
         }
+        else {
+            stopDeflector();
+        }
 
         //When deflector is lowered
         if (gamepad2.a) {
             closeDeflector();
         }
+        else {
+            stopDeflector();
+        }
 
         //When ball is shooting
         if (gamepad2.x) {
            shootBalls();
+        }
+        else{
+            stopShootBalls();
+        }
+
+        //When collector is collecting balls
+        if (gamepad1.right_trigger>0){
+            collectorForward();
+        }
+        else {
+            stopCollector();
+        }
+
+        //When collector is spitting balls out
+        if (gamepad1.left_trigger>0){
+            collectorBackward();
+        }
+        else{
+            stopCollector();
         }
     }
 }

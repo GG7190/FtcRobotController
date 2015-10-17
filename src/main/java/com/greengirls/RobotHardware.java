@@ -70,83 +70,122 @@ public class RobotHardware extends OpMode {
         closeBallChannel();
     }
 
+    //why?
+    //get the power for both right motors
     public double getRightMotors(){
         return rightFrontMotor.getPower();
     }
 
+    //set get power for both left motors
     public double getLeftMotors(){
         return leftFrontMotor.getPower();
     }
 
+    //set power to right motors
     public void setRightMotors(double power){
         rightFrontMotor.setPower(power);
         rightBackMotor.setPower(power);
     }
+
+    //set power to left motors
     public void setLeftMotors(double power){
         leftFrontMotor.setPower(power);
         leftBackMotor.setPower(power);
     }
 
+    //get the power to collector motor
     public double getCollectorMotor(){
         return collectorMotor.getPower();
     }
 
+    //set the power to collector motor
     public void setCollectorMotor(double power) {
         collectorMotor.setPower(power);
     }
 
+    //get the power to shooter motor
     public double getShooterMotor(){
         return shooterMotor.getPower();
     }
 
+    //set the power to shooter motor
     public void setShooterMotor(double power){
         shooterMotor.setPower(power);
     }
 
+    //get the power to deflector motor
     public double getDeflectorMotor(){
         return deflectorMotor.getPower();
     }
 
+    //get the power to deflector motor
     public void setDeflectorMotor(double power){
         deflectorMotor.setPower(power);
     }
 
+    //why?
+    //put dinoArms into open position
     public void openDinoArms(){
         dinoArm1.setPosition(DINO_ARM_MIN_RANGE);
         dinoArm2.setPosition(DINO_ARM_MAX_RANGE);
     }
 
+    //put dinoArms into close position
     public void closeDinoArms(){
         dinoArm1.setPosition(DINO_ARM_MAX_RANGE);
         dinoArm2.setPosition(DINO_ARM_MIN_RANGE);
     }
 
+    //put ball channel into open position
     public void openBallChannel() {
         ballChannel.setPosition(BALL_CHANNEL_MIN_RANGE);
     }
 
+    //put ballChannel into close position
     public void closeBallChannel() {
         ballChannel.setPosition(BALL_CHANNEL_MAX_RANGE);
     }
 
+    //run deflector to open position
     public void openDeflector() {
-        deflectorMotor.setPower(0.1);
+        //deflectorMotor.setPower(0.1);
+        deflectorMotor.setTargetPosition(45);
     }
 
+    //reverse to close position
     public void closeDeflector(){
-        deflectorMotor.setPower(-0.1);
+        //deflectorMotor.setPower(-0.1);
+        deflectorMotor.setTargetPosition(0);
     }
 
-    public void stopDeflector(){
+    //stop deflector motor
+    public void stopDeflector() {
         deflectorMotor.setPower(0);
     }
 
-    public void shootBalls(){
+    //run shooter motor
+    public void shootBalls() {
         shooterMotor.setPower(0.1);
     }
 
+    //stop the shooter motor
     public void stopShootBalls(){
         shooterMotor.setPower(0);
+    }
+
+    //run collector motor
+    public void collectorForward(){
+        collectorMotor.setPower(0.1);
+    }
+
+    //reverse collector motor
+    public void collectorBackward(){
+        collectorMotor.setPower(-0.1);
+    }
+
+    //stop the collector motor
+    public void stopCollector(){
+        collectorMotor.setPower(0);
     }
 
     @Override public void loop() {
