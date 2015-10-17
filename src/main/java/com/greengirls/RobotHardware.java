@@ -39,6 +39,8 @@ public class RobotHardware extends OpMode {
     private DcMotor deflectorMotor;
 
     @Override public void init(){
+
+
         //Map hardware for Right motor controller
         rightMotorController = hardwareMap.dcMotorController.get("right_drive_controller");
         rightFrontMotor = hardwareMap.dcMotor.get("right_front_motor");
@@ -64,6 +66,8 @@ public class RobotHardware extends OpMode {
         dinoArm2 = hardwareMap.servo.get("servo_2");
         ballChannel = hardwareMap.servo.get("servo_3");
 
+        openDinoArms();
+        closeBallChannel();
     }
 
     public double getRightMotors(){
@@ -125,6 +129,25 @@ public class RobotHardware extends OpMode {
         ballChannel.setPosition(BALL_CHANNEL_MAX_RANGE);
     }
 
+    public void openDeflector() {
+        deflectorMotor.setPower(0.1);
+    }
+
+    public void closeDeflector(){
+        deflectorMotor.setPower(-0.1);
+    }
+
+    public void stopDeflector(){
+        deflectorMotor.setPower(0);
+    }
+
+    public void shootBalls(){
+        shooterMotor.setPower(0.1);
+    }
+
+    public void stopShootBalls(){
+        shooterMotor.setPower(0);
+    }
 
     @Override public void loop() {
 
