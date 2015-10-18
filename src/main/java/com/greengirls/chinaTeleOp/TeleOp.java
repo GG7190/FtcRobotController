@@ -43,6 +43,15 @@ public class TeleOp extends RobotHardware {
     @Override
     public void loop() {
 
+        // Right wheels will be controlled by the right stick
+        // Left wheels will be controlled by the left stick
+        float rightWheels = gamepad1.right_stick_y;
+        float leftWheels = gamepad1.left_stick_y;
+
+        // write the values to the motors
+        setRightMotors(rightWheels);
+        setLeftMotors(leftWheels);
+
         //When dino arms are open
         if (gamepad2.left_bumper){
             openDinoArms();
