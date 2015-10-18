@@ -70,7 +70,6 @@ public class RobotHardware extends OpMode {
         closeBallChannel();
     }
 
-    //why?
     //get the power for both right motors
     public double getRightMotors(){
         return rightFrontMotor.getPower();
@@ -123,7 +122,11 @@ public class RobotHardware extends OpMode {
         deflectorMotor.setPower(power);
     }
 
-    //why?
+    /**
+     * We did this for mapping out the buttons
+     * also we could use it in more than one place
+     */
+
     //put dinoArms into open position
     public void openDinoArms(){
         dinoArm1.setPosition(DINO_ARM_MIN_RANGE);
