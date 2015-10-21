@@ -191,6 +191,54 @@ public class RobotHardware extends OpMode {
         collectorMotor.setPower(0);
     }
 
+    //the set up of encoders
+    // had to use math.round to convert a double to an int
+    public void runWithEncoders() {
+        DcMotorController.RunMode l_mode =
+                rightMotorController.getMotorChannelMode
+                        (((int) Math.round(getRightMotors())));
+        if (l_mode == DcMotorController.RunMode.RESET_ENCODERS)
+        {
+            rightMotorController.setMotorChannelMode
+                    ( ((int) Math.round(getRightMotors())), DcMotorController.RunMode.RUN_USING_ENCODERS);
+        }
+    }
+
+    public void resetEncoders() {
+        //
+        // Reset the motor encoders on the drive wheels.
+        //
+        rightMotorController.setMotorChannelMode
+                (((int) Math.round(getRightMotors())), DcMotorController.RunMode.RESET_ENCODERS);
+    }
+
+    public boolean encoderCountReached(double rightCount)
+    {
+        //
+        // Assume failure.
+        //
+        boolean l_status = false;
+
+        //
+        // Have the encoders reached the specified values?
+        //
+        // TODO Implement stall code using these variables.
+        //
+        if ((Math.abs (rightFrontMotor.getCurrentPosition ()) > rightCount))
+        {
+            //
+            // Set the status to a positive indication.
+            //
+            l_status = true;
+        }
+
+        //
+        // Return the status.
+        //
+        return l_status;
+
+    }
+
     @Override public void loop() {
 
     }
