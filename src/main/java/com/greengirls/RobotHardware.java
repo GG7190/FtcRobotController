@@ -2,6 +2,7 @@ package com.greengirls;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.IrSeekerSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ServoController;
@@ -37,6 +38,9 @@ public class RobotHardware extends OpMode {
     private DcMotor shooterMotor;
     private DcMotorController deflectorMotorController;
     private DcMotor deflectorMotor;
+
+    //define sensors
+    private IrSeekerSensor.IrSeekerIndividualSensor
 
     @Override public void init(){
 
@@ -238,6 +242,8 @@ public class RobotHardware extends OpMode {
         return l_status;
 
     }
+
+
 
     @Override public void loop() {
 

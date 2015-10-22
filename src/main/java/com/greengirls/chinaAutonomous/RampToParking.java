@@ -20,9 +20,11 @@ public class RampToParking extends RobotHardware {
             case 0:
                 //start facing backward
                 runWithEncoders();
+                //
                 setRightMotors(-1);
                 setLeftMotors(-1);
 
+                //
                 if(encoderCountReached(160)){
 
                     resetEncoders();
