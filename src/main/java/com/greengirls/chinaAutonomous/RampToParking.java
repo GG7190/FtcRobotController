@@ -2,15 +2,19 @@ package com.greengirls.chinaAutonomous;
 
 import com.greengirls.RobotHardware;
 
+import java.util.concurrent.TimeUnit;
+
+
 /**
  * Created by Dell User on 10/15/2015.
  */
 public class RampToParking extends RobotHardware {
-
+    
     //set state to zero
     int state = 0;
 
-    @Override public void loop() {
+    @Override
+    public void loop() {
 
         switch (state){
             case 0:
@@ -64,7 +68,7 @@ public class RampToParking extends RobotHardware {
                 closeDinoArms();
                 openDeflector();
                 try {
-                    wait(1000);
+                    TimeUnit.MILLISECONDS.sleep(100);
                 }
                 catch (InterruptedException e){
 
@@ -72,7 +76,7 @@ public class RampToParking extends RobotHardware {
 
                 shootBalls();
                 try {
-                    wait(1000);
+                    TimeUnit.MILLISECONDS.sleep(100);
                 }
                 catch (InterruptedException e){
 
