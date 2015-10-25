@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.ServoController;
 /**
  * Created by Dell User on 10/15/2015.
  */
-public class RobotHardware extends OpMode {
+public class RobotHardwareChina extends OpMode {
 
     //Set Max and Min values of dino arms
     protected final static double DINO_ARM_MIN_RANGE  = 0.20;
@@ -40,7 +40,7 @@ public class RobotHardware extends OpMode {
     private DcMotor deflectorMotor;
 
     //define sensors
-    private IrSeekerSensor.IrSeekerIndividualSensor
+    //private IrSeekerSensor IrSeakerSensorSensor;
 
     @Override public void init(){
 
@@ -241,7 +241,7 @@ public class RobotHardware extends OpMode {
         //
         return l_status;
 
-    }
+}
 
 
 

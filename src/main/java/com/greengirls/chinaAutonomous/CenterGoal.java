@@ -1,13 +1,11 @@
 package com.greengirls.chinaAutonomous;
 
-import com.greengirls.RobotHardware;
-
-import java.util.concurrent.TimeUnit;
+import com.greengirls.RobotHardwareChina;
 
 /**
  * Created by Dell User on 10/21/2015.
  */
-public class CenterGoal extends RobotHardware {
+public class CenterGoal extends RobotHardwareChina {
 
     //set state to zero
     int state = 0;

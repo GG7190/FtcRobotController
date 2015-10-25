@@ -1,14 +1,11 @@
 package com.greengirls.chinaTeleOp;
 
-import com.greengirls.RobotHardware;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.greengirls.RobotHardwareChina;
 
 /**
  * Created by G201956 on 10/4/2015.
  */
-public class TeleOp extends RobotHardware {
+public class TeleOp extends RobotHardwareChina {
 
     /*
 	 * Code to run when the op mode is initialized goes here

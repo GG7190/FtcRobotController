@@ -1,6 +1,6 @@
 package com.greengirls.chinaAutonomous;
 
-import com.greengirls.RobotHardware;
+import com.greengirls.RobotHardwareChina;
 
 import java.util.concurrent.TimeUnit;
 
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Dell User on 10/15/2015.
  */
-public class RampToParking extends RobotHardware {
+public class RampToParking extends RobotHardwareChina {
     
     //set state to zero
     int state = 0;
