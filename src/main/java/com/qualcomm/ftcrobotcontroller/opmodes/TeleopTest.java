@@ -103,16 +103,16 @@ public class TeleopTest extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-		motorRight = hardwareMap.dcMotor.get("motor_2");
-		motorLeft = hardwareMap.dcMotor.get("motor_1");
+		motorRight = hardwareMap.dcMotor.get("left_back_motor");
+		motorLeft = hardwareMap.dcMotor.get("left_front_motor");
 		motorLeft.setDirection(DcMotor.Direction.REVERSE);
 		
-		arm = hardwareMap.servo.get("servo_1");
-		claw = hardwareMap.servo.get("servo_6");
+		//arm = hardwareMap.servo.get("servo_1");
+		//claw = hardwareMap.servo.get("servo_6");
 
 		// assign the starting position of the wrist and claw
-		armPosition = 0.2;
-		clawPosition = 0.2;
+		//armPosition = 0.2;
+		//clawPosition = 0.2;
 	}
 
 	/*
@@ -134,10 +134,10 @@ public class TeleopTest extends OpMode {
 		// 1 is full down
 		// direction: left_stick_x ranges from -1 to 1, where -1 is full left
 		// and 1 is full right
-		float throttle = -gamepad1.left_stick_y;
-		float direction = gamepad1.left_stick_x;
-		float right = throttle - direction;
-		float left = throttle + direction;
+		float left  = -gamepad1.left_stick_y;
+		float right = gamepad1.left_stick_x;
+		//float right = throttle - direction;
+		//float left = throttle + direction;
 
 		// clip the right/left values so that the values never exceed +/- 1
 		right = Range.clip(right, -1, 1);
@@ -151,7 +151,7 @@ public class TeleopTest extends OpMode {
 		// write the values to the motors
 		motorRight.setPower(right);
 		motorLeft.setPower(left);
-
+/*
 		// update the position of the arm.
 		if (gamepad1.a) {
 			// if the A button is pushed on gamepad1, increment the position of
@@ -183,7 +183,7 @@ public class TeleopTest extends OpMode {
 		claw.setPosition(clawPosition);
 
 
-
+*/
 		/*
 		 * Send telemetry data back to driver station. Note that if we are using
 		 * a legacy NXT-compatible motor controller, then the getPower() method
@@ -191,8 +191,8 @@ public class TeleopTest extends OpMode {
 		 * are currently write only.
 		 */
         telemetry.addData("Text", "*** Robot Data***");
-        telemetry.addData("arm", "arm:  " + String.format("%.2f", armPosition));
-        telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
+  //      telemetry.addData("arm", "arm:  " + String.format("%.2f", armPosition));
+  //      telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
         telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
         telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
 
