@@ -75,8 +75,8 @@ public class RobotHardwareChina extends OpMode {
 
         //Map hardware sensors
         //legacy module
-        irSensorRight = hardwareMap.irSeekerSensor.get("ir_seeker_right");
-        irSensorLeft = hardwareMap.irSeekerSensor.get("ir_seeker_left");
+        irSensorRight = hardwareMap.irSeekerSensor.get("ir_right");
+        irSensorLeft = hardwareMap.irSeekerSensor.get("ir_left");
 
         openDinoArms();
         closeBallChannel();
@@ -134,6 +134,10 @@ public class RobotHardwareChina extends OpMode {
         deflectorMotor.setPower(power);
     }
 
+    public boolean getIrReading() {
+        return irSensorRight.signalDetected();
+
+    }
     /**
      * We did this for mapping out the buttons
      * also we could use it in more than one place

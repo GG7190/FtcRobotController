@@ -34,6 +34,9 @@ public class CenterGoal extends RobotHardwareChina {
                 break;
 
             case 1:
+                runWithEncoders();
+
+                if ()
                 //check ir sensor for position
         }
     }
