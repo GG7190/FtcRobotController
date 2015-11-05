@@ -33,7 +33,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -49,27 +48,29 @@ public class TeleopTest extends OpMode {
 	 * Also, as the claw servo approaches 0, the claw opens up (drops the game element).
 	 */
 	// TETRIX VALUES.
-	final static double ARM_MIN_RANGE  = 0.20;
+	/*final static double ARM_MIN_RANGE  = 0.20;
 	final static double ARM_MAX_RANGE  = 0.90;
 	final static double CLAW_MIN_RANGE  = 0.20;
 	final static double CLAW_MAX_RANGE  = 0.7;
-
+*/
 	// position of the arm servo.
-	double armPosition;
+//	double armPosition;
 
 	// amount to change the arm servo position.
-	double armDelta = 0.1;
+//	double armDelta = 0.1;
 
 	// position of the claw servo
-	double clawPosition;
+//	double clawPosition;
 
 	// amount to change the claw servo position by
-	double clawDelta = 0.1;
+//	double clawDelta = 0.1;
 
-	DcMotor motorRight;
-	DcMotor motorLeft;
-	Servo claw;
-	Servo arm;
+	DcMotor motorBackRight;
+	DcMotor motorFrontRight;
+	DcMotor motorFrontLeft;
+	DcMotor motorBackLeft;
+//	Servo claw;
+//	Servo arm;
 
 	/**
 	 * Constructor
@@ -79,9 +80,9 @@ public class TeleopTest extends OpMode {
 	}
 
 	/*
-	 * Code to run when the op mode is initialized goes here
+	 * Code to run when the op mode is first enabled goes here
 	 * 
-	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#init()
+	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
 	 */
 	@Override
 	public void init() {
@@ -103,16 +104,22 @@ public class TeleopTest extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-		motorRight = hardwareMap.dcMotor.get("left_back_motor");
-		motorLeft = hardwareMap.dcMotor.get("left_front_motor");
-		motorLeft.setDirection(DcMotor.Direction.REVERSE);
-		
-		//arm = hardwareMap.servo.get("servo_1");
-		//claw = hardwareMap.servo.get("servo_6");
+
+		motorBackRight = hardwareMap.dcMotor.get("rback");
+		motorBackLeft = hardwareMap.dcMotor.get("lback");
+		motorFrontLeft = hardwareMap.dcMotor.get("lfront");
+		motorFrontRight = hardwareMap.dcMotor.get("rfront");
+		//motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
+		motorBackRight.setDirection(DcMotor.Direction.REVERSE);
+		motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
+//		motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
+//		arm = hardwareMap.servo.get("servo_1");
+//		claw = hardwareMap.servo.get("servo_6");
 
 		// assign the starting position of the wrist and claw
-		//armPosition = 0.2;
-		//clawPosition = 0.2;
+//		armPosition = 0.2;
+//		clawPosition = 0.2;
+
 	}
 
 	/*
@@ -130,14 +137,9 @@ public class TeleopTest extends OpMode {
 		 * wrist/claw via the a,b, x, y buttons
 		 */
 
-		// throttle: left_stick_y ranges from -1 to 1, where -1 is full up, and
-		// 1 is full down
-		// direction: left_stick_x ranges from -1 to 1, where -1 is full left
-		// and 1 is full right
-		float left  = -gamepad1.left_stick_y;
-		float right = gamepad1.left_stick_x;
-		//float right = throttle - direction;
-		//float left = throttle + direction;
+
+		float right = -gamepad1.right_stick_y;
+		float left = gamepad1.left_stick_y;
 
 		// clip the right/left values so that the values never exceed +/- 1
 		right = Range.clip(right, -1, 1);
@@ -147,67 +149,82 @@ public class TeleopTest extends OpMode {
 		// the robot more precisely at slower speeds.
 		right = (float)scaleInput(right);
 		left =  (float)scaleInput(left);
-		
-		// write the values to the motors
-		motorRight.setPower(right);
-		motorLeft.setPower(left);
-/*
-		// update the position of the arm.
-		if (gamepad1.a) {
-			// if the A button is pushed on gamepad1, increment the position of
-			// the arm servo.
-			armPosition += armDelta;
-		}
 
-		if (gamepad1.y) {
-			// if the Y button is pushed on gamepad1, decrease the position of
-			// the arm servo.
-			armPosition -= armDelta;
-		}
+		// write the values to the motors
+
+		motorBackRight.setPower(right);
+		motorBackLeft.setPower(left);
+
+		// write the values to the motors
+		motorFrontRight.setPower(right);
+		motorFrontLeft.setPower(left);
+
+		// update the position of the arm.
+//		if (gamepad1.a) {
+		// if the A button is pushed on gamepad1, increment the position of
+		// the arm servo.
+//			armPosition += armDelta;
+//		}
+
+//		if (gamepad1.y) {
+		// if the Y button is pushed on gamepad1, decrease the position of
+		// the arm servo.
+//			armPosition -= armDelta;
+//		}
 
 		// update the position of the claw
-		if (gamepad1.x) {
-			clawPosition += clawDelta;
-		}
+//		if (gamepad1.x) {
+//			clawPosition += clawDelta;
+//		}
 
-		if (gamepad1.b) {
-			clawPosition -= clawDelta;
-		}
+//		if (gamepad1.b) {
+//			clawPosition -= clawDelta;
+//		}
 
-        // clip the position values so that they never exceed their allowed range.
-        armPosition = Range.clip(armPosition, ARM_MIN_RANGE, ARM_MAX_RANGE);
-        clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
+		// clip the position values so that they never exceed their allowed range.
+//        armPosition = Range.clip(armPosition, ARM_MIN_RANGE, ARM_MAX_RANGE);
+//        clawPosition = Range.clip(clawPosition, CLAW_MIN_RANGE, CLAW_MAX_RANGE);
 
 		// write position values to the wrist and claw servo
-		arm.setPosition(armPosition);
-		claw.setPosition(clawPosition);
+//		arm.setPosition(armPosition);
+//		claw.setPosition(clawPosition);
 
 
-*/
+
 		/*
 		 * Send telemetry data back to driver station. Note that if we are using
 		 * a legacy NXT-compatible motor controller, then the getPower() method
 		 * will return a null value. The legacy NXT-compatible motor controllers
 		 * are currently write only.
 		 */
-        telemetry.addData("Text", "*** Robot Data***");
-  //      telemetry.addData("arm", "arm:  " + String.format("%.2f", armPosition));
-  //      telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
-        telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
-        telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
 
+		telemetry.addData("Text", "*** Robot Data***");
+//        telemetry.addData("arm", "arm:  " + String.format("%.2f", armPosition));
+//        telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
+		telemetry.addData("left tgt pwr",  "left  pwr: " + String.format("%.2f", left));
+		telemetry.addData("right tgt pwr", "right pwr: " + String.format("%.2f", right));
+//		tlelmetry.addData("lfront", )
 	}
 
-	/*
-	 * Code to run when the op mode is first disabled goes here
-	 * 
-	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
-	 */
+		/*
+         * Code to run when the op mode is first disabled goes here
+         *
+         * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
+         */
 	@Override
 	public void stop() {
 
+		// write the values to the motors
+		motorBackRight.setPower(0);
+		motorBackLeft.setPower(0);
+
+		// write the values to the motors
+		motorFrontRight.setPower(0);
+		motorFrontLeft.setPower(0);
+
 	}
-	
+
+
 	/*
 	 * This method scales the joystick input so for low joystick values, the 
 	 * scaled value is less than linear.  This is to make it easier to drive
@@ -216,22 +233,29 @@ public class TeleopTest extends OpMode {
 	double scaleInput(double dVal)  {
 		double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
 				0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
-		
+
 		// get the corresponding index for the scaleInput array.
 		int index = (int) (dVal * 16.0);
+
+		// index should be positive.
 		if (index < 0) {
 			index = -index;
-		} else if (index > 16) {
+		}
+
+		// index cannot exceed size of array minus 1.
+		if (index > 16) {
 			index = 16;
 		}
-		
+
+		// get value from the array.
 		double dScale = 0.0;
 		if (dVal < 0) {
 			dScale = -scaleArray[index];
 		} else {
 			dScale = scaleArray[index];
 		}
-		
+
+		// return scaled value.
 		return dScale;
 	}
 

@@ -51,8 +51,8 @@ public class K9IrSeeker extends OpMode {
 
 	DcMotor motorRight;
 	DcMotor motorLeft;
-	Servo claw;
-	Servo arm;
+//	Servo claw;
+//	Servo arm;
 	IrSeekerSensor irSeeker;
 	
 	/**
@@ -86,22 +86,22 @@ public class K9IrSeeker extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-		motorRight = hardwareMap.dcMotor.get("motor_2");
-		motorLeft = hardwareMap.dcMotor.get("motor_1");
+		motorRight = hardwareMap.dcMotor.get("rback");
+		motorLeft = hardwareMap.dcMotor.get("lback");
 		motorLeft.setDirection(DcMotor.Direction.REVERSE);
 		
-		arm = hardwareMap.servo.get("servo_1");
-		claw = hardwareMap.servo.get("servo_6");
+//		arm = hardwareMap.servo.get("servo_1");
+//		claw = hardwareMap.servo.get("servo_6");
 
 		// set the starting position of the wrist and claw
-		armPosition = 0.1;
-		clawPosition = 0.25;
+//		armPosition = 0.1;
+//		clawPosition = 0.25;
 
 		/*
 		 * We also assume that we have a Hitechnic IR Seeker v2 sensor
 		 * with a name of "ir_seeker" configured for our robot.
 		 */
-		irSeeker = hardwareMap.irSeekerSensor.get("ir_seeker");
+		irSeeker = hardwareMap.irSeekerSensor.get("irseeker");
 	}
 
 	/*
@@ -116,8 +116,8 @@ public class K9IrSeeker extends OpMode {
 		double left, right = 0.0;
 		
 		// keep manipulator out of the way.
-		arm.setPosition(armPosition);
-		claw.setPosition(clawPosition);
+//		arm.setPosition(armPosition);
+//		claw.setPosition(clawPosition);
 	
 		/*
 		 * Do we detect an IR signal?
