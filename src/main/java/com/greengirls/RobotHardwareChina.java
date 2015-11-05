@@ -47,28 +47,32 @@ public class RobotHardwareChina extends OpMode {
 
         //Map hardware for Right motor controller
         rightMotorController = hardwareMap.dcMotorController.get("right_drive_controller");
-        rightFrontMotor = hardwareMap.dcMotor.get("right_front_motor");
-        rightBackMotor = hardwareMap.dcMotor.get("right_back_motor");
+        rightFrontMotor = hardwareMap.dcMotor.get("rfront");
+        rightBackMotor = hardwareMap.dcMotor.get("rback");
 
         //Map hardware for Left motor controller
         leftMotorController = hardwareMap.dcMotorController.get("left_drive_controller");
-        leftFrontMotor = hardwareMap.dcMotor.get("left_front_motor");
-        leftBackMotor = hardwareMap.dcMotor.get("left_back_motor");
+        leftFrontMotor = hardwareMap.dcMotor.get("lfront");
+        leftBackMotor = hardwareMap.dcMotor.get("lback");
+
+        //Reversing motors of wheels
+        rightBackMotor.setDirection(DcMotor.Direction.REVERSE);
+        leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
 
         //Map hardware for collector shooter motor controller
         collectorShooterMotorController = hardwareMap.dcMotorController.get("collector_shooter_controller");
-        collectorMotor = hardwareMap.dcMotor.get("collector_motor");
-        shooterMotor = hardwareMap.dcMotor.get("shooter_motor");
+        collectorMotor = hardwareMap.dcMotor.get("collector");
+        shooterMotor = hardwareMap.dcMotor.get("shooter");
 
         //Map hardware for deflector motor controller
         deflectorMotorController = hardwareMap.dcMotorController.get("deflector_controller");
-        deflectorMotor = hardwareMap.dcMotor.get("deflector_motor");
+        deflectorMotor = hardwareMap.dcMotor.get("deflector");
 
         //Map hardware for servos
         servoController = hardwareMap.servoController.get("servo_controller");
-        dinoArm1 = hardwareMap.servo.get("servo_1");
-        dinoArm2 = hardwareMap.servo.get("servo_2");
-        ballChannel = hardwareMap.servo.get("servo_3");
+        dinoArm1 = hardwareMap.servo.get("dinoright");
+        dinoArm2 = hardwareMap.servo.get("dinoleft");
+        ballChannel = hardwareMap.servo.get("ballchannel");
 
         openDinoArms();
         closeBallChannel();

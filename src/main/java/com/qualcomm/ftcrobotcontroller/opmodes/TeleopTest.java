@@ -33,7 +33,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -66,10 +65,10 @@ public class TeleOpTest extends OpMode {
 	// amount to change the claw servo position by
 //	double clawDelta = 0.1;
 
-	DcMotor motorRight;
+	DcMotor motorBackRight;
 	DcMotor motorFrontRight;
 	DcMotor motorFrontLeft;
-	DcMotor motorLeft;
+	DcMotor motorBackLeft;
 //	Servo claw;
 //	Servo arm;
 
@@ -105,12 +104,12 @@ public class TeleOpTest extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
-		motorRight = hardwareMap.dcMotor.get("rback");
-		motorLeft = hardwareMap.dcMotor.get("lback");
+		motorBackRight = hardwareMap.dcMotor.get("rback");
+		motorBackLeft = hardwareMap.dcMotor.get("lback");
 		motorFrontLeft = hardwareMap.dcMotor.get("lfront");
 		motorFrontRight = hardwareMap.dcMotor.get("rfront");
-		//motorLeft.setDirection(DcMotor.Direction.REVERSE);
-		motorRight.setDirection(DcMotor.Direction.REVERSE);
+		//motorBackLeft.setDirection(DcMotor.Direction.REVERSE);
+		motorBackRight.setDirection(DcMotor.Direction.REVERSE);
 		motorFrontLeft.setDirection(DcMotor.Direction.REVERSE);
 //		motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
 //		arm = hardwareMap.servo.get("servo_1");
@@ -136,14 +135,6 @@ public class TeleOpTest extends OpMode {
 		 * wrist/claw via the a,b, x, y buttons
 		 */
 
-		// throttle: left_stick_y ranges from -1 to 1, where -1 is full up, and
-		// 1 is full down
-		// direction: left_stick_x ranges from -1 to 1, where -1 is full left
-		// and 1 is full right
-		float throttle = -gamepad1.left_stick_y;
-		float direction = gamepad1.right_stick_y;
-//		float right = throttle - direction;
-//		float left = throttle + direction;
 
 		float right = gamepad1.right_stick_y;
 		float left = gamepad1.left_stick_y;
@@ -158,8 +149,8 @@ public class TeleOpTest extends OpMode {
 		left =  (float)scaleInput(left);
 
 		// write the values to the motors
-		motorRight.setPower(right);
-		motorLeft.setPower(left);
+		motorBackRight.setPower(right);
+		motorBackLeft.setPower(left);
 
 		// write the values to the motors
 		motorFrontRight.setPower(right);
@@ -212,13 +203,21 @@ public class TeleOpTest extends OpMode {
 //		tlelmetry.addData("lfront", )
 	}
 
-	/*
-	 * Code to run when the op mode is first disabled goes here
-	 * 
-	 * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
-	 */
+		/*
+         * Code to run when the op mode is first disabled goes here
+         *
+         * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#stop()
+         */
 	@Override
 	public void stop() {
+
+		// write the values to the motors
+		motorBackRight.setPower(0);
+		motorBackLeft.setPower(0);
+
+		// write the values to the motors
+		motorFrontRight.setPower(0);
+		motorFrontLeft.setPower(0);
 
 	}
 
