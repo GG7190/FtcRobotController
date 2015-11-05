@@ -1,4 +1,4 @@
-package com.greengirls;
+package com.greengirls.ResQ2016;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -19,7 +19,8 @@ public class RobotHardware2016 extends OpMode{
     private DcMotor rightBackMotor;
     private DcMotor leftBackMotor;
     private DcMotorController attachmentMotorController;
-    private DcMotor liftMotor;
+    private DcMotor liftMotorRight;
+    private DcMotor liftMotorLeft;
 
     @Override public void init() {
 
@@ -36,8 +37,51 @@ public class RobotHardware2016 extends OpMode{
 
         //Map hardware for attachment motor controller
         attachmentMotorController = hardwareMap.dcMotorController.get("attachment_controller");
-        liftMotor = hardwareMap.dcMotor.get("lift_motor");
+        liftMotorRight = hardwareMap.dcMotor.get("lift_right_motor");
+        liftMotorLeft = hardwareMap.dcMotor.get("lift_left_motor");
 
+    }
+
+    //get the power for both right motors
+    public double getRightMotors(){
+        return rightFrontMotor.getPower();
+    }
+
+    //set get power for both left motors
+    public double getLeftMotors(){
+        return leftFrontMotor.getPower();
+    }
+
+    //set power to right motors
+    public void setRightMotors(double power){
+        rightFrontMotor.setPower(power);
+        rightBackMotor.setPower(power);
+    }
+
+    //set power to left motors
+    public void setLeftMotors(double power){
+        leftFrontMotor.setPower(power);
+        leftBackMotor.setPower(power);
+    }
+
+    //get the power to right lift motor
+    public double getLiftMotorRight(){
+        return liftMotorRight.getPower();
+    }
+
+    //set the power to right lift motor
+    public void setLiftMotorRight(double power) {
+        liftMotorRight.setPower(power);
+    }
+
+    //get the power to left lift motor
+    public double getLiftMotorLeft(){
+        return liftMotorLeft.getPower();
+    }
+
+    //set the power to collector motor
+    public void setLiftMotorLeft(double power) {
+        liftMotorLeft.setPower(power);
     }
 
     @Override public void loop() {

@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.greengirls.chinaTeleOp.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
@@ -78,19 +79,17 @@ public class FtcOpModeRegister implements OpModeRegister {
     //manager.register("LinearK9TeleOp", LinearK9TeleOp.class);
     //manager.register("LinearIrExample", LinearIrExample.class);
 
+    /*
+     * The following example op modes are designed to work with a K9-style robot.
+     *  - K9TeleOp is a simple driver controlled program.
+     *  - K9IrSeeker uses a legacy IR seeker V2 sensor to follow a beacon.
+     *  - K9Line uses a legacy LEGO NXT light sensor to follow a white line.
+     */
+    manager.register("TeleopTest", TeleOp.class);
+    manager.register("K9TeleOp", K9TeleOp.class);
+    manager.register("K9IrSeeker", K9IrSeeker.class);
+    manager.register("K9Line", K9Line.class);
 
-    //manager.register ("PushBotManual1", PushBotManual1.class);
-    //manager.register ("PushBotAutoSensors", PushBotAutoSensors.class);
-    //manager.register ("PushBotIrEvent", PushBotIrEvent.class);
-
-    //manager.register ("PushBotManualSensors", PushBotManualSensors.class);
-    //manager.register ("PushBotOdsDetectEvent", PushBotOdsDetectEvent.class);
-    //manager.register ("PushBotOdsFollowEvent", PushBotOdsFollowEvent.class);
-    //manager.register ("PushBotTouchEvent", PushBotTouchEvent.class);    
-
-    //manager.register("PushBotDriveTouch", PushBotDriveTouch.java);
-    //manager.register("PushBotIrSeek", PushBotIrSeek.java);
-    //manager.register("PushBotSquare", PushBotSquare.java);
 
 
 

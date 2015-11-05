@@ -40,7 +40,10 @@ public class RobotHardwareChina extends OpMode {
     private DcMotor deflectorMotor;
 
     //define sensors
-    //private IrSeekerSensor IrSeakerSensorSensor;
+    //legacy module
+    private IrSeekerSensor irSensorRight;
+    private IrSeekerSensor irSensorLeft;
+
 
     @Override public void init(){
 
@@ -70,9 +73,15 @@ public class RobotHardwareChina extends OpMode {
 
         //Map hardware for servos
         servoController = hardwareMap.servoController.get("servo_controller");
+
         dinoArm1 = hardwareMap.servo.get("dinoright");
         dinoArm2 = hardwareMap.servo.get("dinoleft");
         ballChannel = hardwareMap.servo.get("ballchannel");
+
+        //Map hardware sensors
+        //legacy module
+        irSensorRight = hardwareMap.irSeekerSensor.get("irright");
+        irSensorLeft = hardwareMap.irSeekerSensor.get("irleft");
 
         openDinoArms();
         closeBallChannel();

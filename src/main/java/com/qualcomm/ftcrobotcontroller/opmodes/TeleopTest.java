@@ -40,7 +40,7 @@ import com.qualcomm.robotcore.util.Range;
  * <p>
  * Enables control of the robot via the gamepad
  */
-public class TeleOpTest extends OpMode {
+public class TeleopTest extends OpMode {
 
 	/*
 	 * Note: the configuration of the servos is such that
@@ -75,7 +75,7 @@ public class TeleOpTest extends OpMode {
 	/**
 	 * Constructor
 	 */
-	public TeleOpTest() {
+	public TeleopTest() {
 
 	}
 
@@ -104,6 +104,7 @@ public class TeleOpTest extends OpMode {
 		 *    "servo_1" controls the arm joint of the manipulator.
 		 *    "servo_6" controls the claw joint of the manipulator.
 		 */
+
 		motorBackRight = hardwareMap.dcMotor.get("rback");
 		motorBackLeft = hardwareMap.dcMotor.get("lback");
 		motorFrontLeft = hardwareMap.dcMotor.get("lfront");
@@ -118,6 +119,7 @@ public class TeleOpTest extends OpMode {
 		// assign the starting position of the wrist and claw
 //		armPosition = 0.2;
 //		clawPosition = 0.2;
+
 	}
 
 	/*
@@ -136,7 +138,7 @@ public class TeleOpTest extends OpMode {
 		 */
 
 
-		float right = gamepad1.right_stick_y;
+		float right = -gamepad1.right_stick_y;
 		float left = gamepad1.left_stick_y;
 
 		// clip the right/left values so that the values never exceed +/- 1
@@ -149,13 +151,13 @@ public class TeleOpTest extends OpMode {
 		left =  (float)scaleInput(left);
 
 		// write the values to the motors
+
 		motorBackRight.setPower(right);
 		motorBackLeft.setPower(left);
 
 		// write the values to the motors
 		motorFrontRight.setPower(right);
 		motorFrontLeft.setPower(left);
-
 
 		// update the position of the arm.
 //		if (gamepad1.a) {
@@ -195,6 +197,7 @@ public class TeleOpTest extends OpMode {
 		 * will return a null value. The legacy NXT-compatible motor controllers
 		 * are currently write only.
 		 */
+
 		telemetry.addData("Text", "*** Robot Data***");
 //        telemetry.addData("arm", "arm:  " + String.format("%.2f", armPosition));
 //        telemetry.addData("claw", "claw:  " + String.format("%.2f", clawPosition));
