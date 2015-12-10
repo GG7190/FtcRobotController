@@ -1,5 +1,7 @@
 package com.greengirls;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -11,7 +13,7 @@ import com.qualcomm.robotcore.hardware.ServoController;
 public class RobotHardware2016 extends OpMode{
 
     protected final static double BASKET_MIN_RANGE  = 0.30;
-    protected final static double BASKET_MID_RANGE  = 0.70;
+    protected final static double BASKET_MID_RANGE  = 0.58;
     protected final static double BASKET_MAX_RANGE  = 0.90;
 
     //define Motors and MotorControllers
@@ -59,8 +61,7 @@ public class RobotHardware2016 extends OpMode{
 
         middleBasket();
 
-        basket.setPosition(BASKET_MAX_RANGE);
-        basket.setPosition(BASKET_MIN_RANGE);
+        basket.setPosition(BASKET_MID_RANGE);
     }
 
     //setters and getters for all motors for use outside this program
@@ -70,10 +71,22 @@ public class RobotHardware2016 extends OpMode{
         rightBackMotor.setPower(power);
     }
 
+    //stop right motors
+    public void stopRightMotors(){
+        rightFrontMotor.setPower(0);
+        rightBackMotor.setPower(0);
+    }
+
     //set power to left motors
     public void setLeftMotors(double power){
         leftFrontMotor.setPower(power);
         leftBackMotor.setPower(power);
+    }
+
+    //stop left motors
+    public void stopLeftMotors(){
+        leftFrontMotor.setPower(0);
+        leftBackMotor.setPower(0);
     }
 
     //get the power to collector motor
@@ -129,17 +142,17 @@ public class RobotHardware2016 extends OpMode{
     }
 
     //coil in
-    public void coilIn(){
-        coilMotor.setPower(-1);
-    }
+  //  public void coilIn(){
+  //      coilMotor.setPower(-1);
+  //  }
     //coil out
-    public void coilOut(){
-        coilMotor.setPower(1);
-    }
+   // public void coilOut(){
+   //     coilMotor.setPower(1);
+   // }
     //stop coil motor
-    public void coilStop(){
-        coilMotor.setPower(0);
-    }
+   // public void coilStop(){
+   //     coilMotor.setPower(0);
+   // }
 
     //wait config
     public static void wait(int time) {
@@ -149,6 +162,7 @@ public class RobotHardware2016 extends OpMode{
         }
         catch (InterruptedException e) {
             e.printStackTrace();
+            Log.e(e.getClass().toString(),e.getStackTrace().toString());
         }
     }
 

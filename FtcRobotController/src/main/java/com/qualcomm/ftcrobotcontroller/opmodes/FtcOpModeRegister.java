@@ -31,6 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.greengirls.ResQAuto.AutoFloorLance;
 import com.greengirls.ResQTeleOp.TeleOpLance;
 import com.greengirls.chinaAutonomous.RampToParking;
 import com.greengirls.chinaAutonomous.WARCAuto;
@@ -62,7 +63,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("NullOp", NullOp.class);
     manager.register("K9IRSeeker", K9IrSeeker.class);
     manager.register("TeleOpLance", TeleOpLance.class);
-    manager.register("WARCAuto", WARCAuto.class);
+    manager.register("AutoFloorLance", AutoFloorLance.class);
     manager.register("RampToParking", RampToParking.class);
     manager.register("K9TeleOp", K9TeleOp.class);
     manager.register ("PushBotAuto", PushBotAuto.class);

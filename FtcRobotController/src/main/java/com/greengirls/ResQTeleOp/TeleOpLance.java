@@ -62,17 +62,17 @@ public class TeleOpLance extends RobotHardware2016 {
         //When button y is pressed on game pad 2 the lift extends
         if (gamepad2.y){
             liftOut();
-            coilOut();
+            //coilOut();
         }
         //When button a is pressed on game pad 2 the lift retracts
         else if (gamepad2.a){
             liftIn();
-            coilIn();
+            //coilIn();
         }
         //when button a is not pressed stop lift motor
         else {
             stoplift();
-            coilStop();
+            //coilStop();
         }
 
         //when button x is pressed on gamepad 2 lift angle increases

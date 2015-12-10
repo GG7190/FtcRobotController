@@ -46,8 +46,8 @@ public class TeleOp extends RobotHardwareChina {
 
         // Right wheels will be controlled by the right stick
         // Left wheels will be controlled by the left stick
-        float rightWheels = gamepad1.right_stick_y;
-        float leftWheels = gamepad1.left_stick_y;
+        float leftWheels = -gamepad1.right_stick_y;
+        float rightWheels = gamepad1.left_stick_y;
 
         // write the values to the motors
         setRightMotors(rightWheels);
@@ -64,11 +64,10 @@ public class TeleOp extends RobotHardwareChina {
         }
 
         //When ball channel is open
-        if (gamepad2.right_bumper) {
+        if (gamepad2.b) {
             openBallChannel();
         }
-        else if (gamepad2.left_bumper) {
-        //When ball channel is closed
+        else {
             closeBallChannel();
         }
 
