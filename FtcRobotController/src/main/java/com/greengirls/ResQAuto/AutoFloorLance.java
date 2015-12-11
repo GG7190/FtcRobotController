@@ -19,7 +19,7 @@ public class AutoFloorLance extends RobotHardware2016 {
                 setLeftMotors(-1);
                 setRightMotors(1);
                 setCollectorMotor(-1);
-                if( count >= 40 && count<200) {
+                if( count >= 600 && count<3000) {
                     state++;
                 }
                 count++;
