@@ -31,7 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.greengirls.ResQAuto.ArmAutoFloorLance;
 import com.greengirls.ResQAuto.AutoFloorLance;
+import com.greengirls.ResQAuto.ColorAutoLanceBlue;
+import com.greengirls.ResQAuto.ServoTest;
 import com.greengirls.ResQTeleOp.TeleOpLance;
 import com.greengirls.chinaAutonomous.RampToParking;
 import com.greengirls.chinaAutonomous.WARCAuto;
@@ -59,15 +62,15 @@ public class FtcOpModeRegister implements OpModeRegister {
      *
      * If two or more op modes are registered with the same name, the app will display an error.
      */
-    manager.register("TeleOp", TeleOp.class);
+
     manager.register("NullOp", NullOp.class);
-    manager.register("K9IRSeeker", K9IrSeeker.class);
+    manager.register("ColorAutoLanceBlue", ColorAutoLanceBlue.class);
     manager.register("TeleOpLance", TeleOpLance.class);
     manager.register("AutoFloorLance", AutoFloorLance.class);
-    manager.register("RampToParking", RampToParking.class);
-    manager.register("K9TeleOp", K9TeleOp.class);
-    manager.register ("PushBotAuto", PushBotAuto.class);
-    manager.register ("PushBotManual", PushBotManual.class);
+    manager.register("ServoTest", ServoTest.class);
+    manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
+    manager.register("ArmAutoFloorLance", ArmAutoFloorLance.class);
+
 
     /*
      * Uncomment any of the following lines if you want to register an op mode.

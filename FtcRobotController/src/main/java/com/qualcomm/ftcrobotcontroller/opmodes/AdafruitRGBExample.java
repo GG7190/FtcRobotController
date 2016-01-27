@@ -89,16 +89,18 @@ public class AdafruitRGBExample extends LinearOpMode {
     // set the digital channel to output mode.
     // remember, the Adafruit sensor is actually two devices.
     // It's an I2C sensor and it's also an LED that can be turned on or off.
-    cdim.setDigitalChannelMode(LED_CHANNEL, DigitalChannelController.Mode.OUTPUT);
+    // cdim.setDigitalChannelMode(LED_CHANNEL, DigitalChannelController.Mode.OUTPUT);
 
     // get a reference to our ColorSensor object.
     sensorRGB = hardwareMap.colorSensor.get("color");
+    sensorRGB.enableLed(false);
+    cdim.setDigitalChannelState(LED_CHANNEL, false);
 
     // bEnabled represents the state of the LED.
     boolean bEnabled = true;
 
     // turn the LED on in the beginning, just so user will know that the sensor is active.
-    cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
+    // cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
 
     // wait one cycle.
     waitOneFullHardwareCycle();
@@ -107,7 +109,7 @@ public class AdafruitRGBExample extends LinearOpMode {
     waitForStart();
 
     // hsvValues is an array that will hold the hue, saturation, and value information.
-    float hsvValues[] = {0F,0F,0F};
+    float hsvValues[] = {0F, 0F, 0F};
 
     // values is a reference to the hsvValues array.
     final float values[] = hsvValues;
@@ -127,7 +129,7 @@ public class AdafruitRGBExample extends LinearOpMode {
       bCurrState = gamepad1.x || gamepad2.x;
 
       // check for button state transitions.
-      if (bCurrState == true && bCurrState != bPrevState)  {
+      if (bCurrState == true && bCurrState != bPrevState) {
         // button is transitioning to a pressed state.
 
         // print a debug statement.
@@ -140,9 +142,9 @@ public class AdafruitRGBExample extends LinearOpMode {
         bEnabled = true;
 
         // turn on the LED.
-        cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
+        //cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
 
-      } else if (bCurrState == false && bCurrState != bPrevState)  {
+      } else if (bCurrState == false && bCurrState != bPrevState) {
         // button is transitioning to a released state.
 
         // print a debug statement.
@@ -155,7 +157,7 @@ public class AdafruitRGBExample extends LinearOpMode {
         bEnabled = false;
 
         // turn off the LED.
-        cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
+        //cdim.setDigitalChannelState(LED_CHANNEL, bEnabled);
       }
 
       // convert the RGB values to HSV values.
@@ -181,4 +183,5 @@ public class AdafruitRGBExample extends LinearOpMode {
       waitOneFullHardwareCycle();
     }
   }
+
 }

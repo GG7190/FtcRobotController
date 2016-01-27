@@ -3,7 +3,10 @@ package com.greengirls;
 import android.util.Log;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
+import com.qualcomm.robotcore.hardware.LED;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.ServoController;
@@ -12,9 +15,21 @@ import com.qualcomm.robotcore.hardware.ServoController;
  */
 public class RobotHardware2016 extends OpMode{
 
-    protected final static double BASKET_MIN_RANGE  = 0.30;
-    protected final static double BASKET_MID_RANGE  = 0.58;
-    protected final static double BASKET_MAX_RANGE  = 0.90;
+    protected final static double BASKET_MIN_RANGE  = 0.00;
+    protected final static double BASKET_MID_RANGE  = 0.45;
+    protected final static double BASKET_MAX_RANGE  = 1.00;
+
+    protected final static double LWING_MIN_RANGE  = 0.60;
+    protected final static double LWING_MAX_RANGE  = 0.00;
+
+    protected final static double RWING_MIN_RANGE  = 0.30;
+    protected final static double RWING_MAX_RANGE  = 0.90;
+
+    protected final static double LDINO_MIN_RANGE = 0.20;
+    protected final static double LDINO_MAX_RANGE = 0.90;
+
+    protected final static double RDINO_MIN_RANGE = 0.60;
+    protected final static double RDINO_MAX_RANGE = 0.00;
 
     //define Motors and MotorControllers
     private DcMotorController rightMotorController;
@@ -25,15 +40,34 @@ public class RobotHardware2016 extends OpMode{
     private DcMotor leftBackMotor;
     private DcMotorController attachmentMotorController;
     private DcMotor collectorMotor;
-    private DcMotor coilMotor;
-    private DcMotorController liftMotorController;
     private DcMotor angleMotor;
-    private DcMotor liftMotor;
+    private DcMotorController liftMotorController;
+    private DcMotor lift1;
+    private DcMotor lift2;
     private ServoController servoController;
     private Servo basket;
+    private Servo leftWing;
+    private Servo rightWing;
+    private Servo leftDino;
+    private Servo rightDino;
+    private ColorSensor sensorRGB;
+    private DeviceInterfaceModule cdim;
+    static final int LED_CHANNEL = 5;
+
 
     @Override public void init() {
 
+        cdim = hardwareMap.deviceInterfaceModule.get("dim");
+
+        // set the digital channel to output mode.
+        // remember, the Adafruit sensor is actually two devices.
+        // It's an I2C sensor and it's also an LED that can be turned on or off.
+        // cdim.setDigitalChannelMode(LED_CHANNEL, DigitalChannelController.Mode.OUTPUT);
+
+        // get a reference to our ColorSensor object.
+        sensorRGB = hardwareMap.colorSensor.get("color");
+        sensorRGB.enableLed(false);
+        cdim.setDigitalChannelState(LED_CHANNEL, false);
 
         //Map hardware for Right motor controller
         rightMotorController = hardwareMap.dcMotorController.get("rightdrive");
@@ -48,26 +82,43 @@ public class RobotHardware2016 extends OpMode{
         //Map hardware for attachment motor controller
         attachmentMotorController = hardwareMap.dcMotorController.get("attachment");
         collectorMotor = hardwareMap.dcMotor.get("collector");
-        coilMotor = hardwareMap.dcMotor.get("coil");
+        angleMotor = hardwareMap.dcMotor.get("anglemotor");
 
         //Map hardware for lift motor controller
         liftMotorController = hardwareMap.dcMotorController.get("lift");
-        angleMotor = hardwareMap.dcMotor.get("anglemotor");
-        liftMotor = hardwareMap.dcMotor.get("liftmotor");
-
+        lift1 = hardwareMap.dcMotor.get("lift1");
+        lift2 = hardwareMap.dcMotor.get("lift2");
         //Map hardware for servo controller
         servoController = hardwareMap.servoController.get("servo");
         basket = hardwareMap.servo.get("basket");
+        leftWing = hardwareMap.servo.get("lwing");
+        rightWing = hardwareMap.servo.get("rwing");
+        leftDino = hardwareMap.servo.get("ldino");
+        rightDino = hardwareMap.servo.get("rdino");
 
         middleBasket();
 
+        rightDino.setPosition(Servo.MAX_POSITION);
+
         basket.setPosition(BASKET_MID_RANGE);
+
+        rightWingIn();
+        leftWingIn();
+
+        hardwareMap.logDevices();
+
+        // get a reference to our DeviceInterfaceModule object.
+       // cdim = hardwareMap.deviceInterfaceModule.get("dim");
+
+        // get a reference to our ColorSensor object.
+       // sensorRGB = hardwareMap.colorSensor.get("color");
+
     }
 
     //setters and getters for all motors for use outside this program
     //right set
     public void setRightMotors(double power){
-        rightFrontMotor.setPower(power);
+        rightFrontMotor.setPower(.9*power);
         rightBackMotor.setPower(power);
     }
 
@@ -79,7 +130,7 @@ public class RobotHardware2016 extends OpMode{
 
     //set power to left motors
     public void setLeftMotors(double power){
-        leftFrontMotor.setPower(power);
+        leftFrontMotor.setPower(.9*power);
         leftBackMotor.setPower(power);
     }
 
@@ -103,7 +154,7 @@ public class RobotHardware2016 extends OpMode{
     }
 
     //put ball channel into open position
-    public void rigtBasket() {
+    public void rightBasket() {
         basket.setPosition(BASKET_MIN_RANGE);
     }
 
@@ -115,17 +166,43 @@ public class RobotHardware2016 extends OpMode{
         basket.setPosition(BASKET_MAX_RANGE);
     }
 
+
+    public void leftWingOut() {leftWing.setPosition(LWING_MIN_RANGE);}
+
+    public void leftWingIn() {
+        leftWing.setPosition(LWING_MAX_RANGE);
+    }
+
+    public void rightWingOut() {
+        rightWing.setPosition(RWING_MIN_RANGE);
+    }
+    public void rightWingIn() {
+        rightWing.setPosition(RWING_MAX_RANGE);
+    }
+    public void dinoUp(){
+        leftDino.setPosition(LDINO_MIN_RANGE);
+        rightDino.setPosition(RDINO_MIN_RANGE);
+    }
+
+    public void dinoDown (){
+        leftDino.setPosition(LDINO_MAX_RANGE);
+        rightDino.setPosition(RDINO_MAX_RANGE);
+    }
+
     //lift out
     public void liftOut() {
-        liftMotor.setPower(-1);
+        lift1.setPower(-1);
+        lift2.setPower(1);
     }
     //lift in
     public void liftIn() {
-        liftMotor.setPower(1);
+        lift1.setPower(1);
+        lift2.setPower(-1);
     }
     //stop lift motor
     public void stoplift() {
-        liftMotor.setPower(0);
+        lift1.setPower(0);
+        lift2.setPower(0);
     }
 
     //lift angle up
@@ -141,6 +218,10 @@ public class RobotHardware2016 extends OpMode{
         angleMotor.setPower(0);
     }
 
+    public boolean checkRed (){
+        return sensorRGB.red()>0;
+    }
+    public boolean checkBlue (){return sensorRGB.blue()>0;}
     //coil in
   //  public void coilIn(){
   //      coilMotor.setPower(-1);

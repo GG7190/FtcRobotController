@@ -26,8 +26,8 @@ public class TeleOpLance extends RobotHardware2016 {
 
         // Right wheels will be controlled by the right stick
         // Left wheels will be controlled by the left stick
-        float leftWheels = gamepad1.right_stick_y;
-        float rightWheels = -gamepad1.left_stick_y;
+        float leftWheels = gamepad1.left_stick_y;
+        float rightWheels = -gamepad1.right_stick_y;
 
         // write the values to the motors
         setRightMotors(rightWheels);
@@ -45,10 +45,10 @@ public class TeleOpLance extends RobotHardware2016 {
             stopCollector();
         }
 
-        //open and close asket button mapping
+        //open and close basket button mapping
         //tilt left
         if (gamepad2.right_bumper) {
-            rigtBasket();
+            rightBasket();
         }
         //When button x is pressed on gamepad 2 tilt right
         else if (gamepad2.left_bumper){
@@ -74,7 +74,6 @@ public class TeleOpLance extends RobotHardware2016 {
             stoplift();
             //coilStop();
         }
-
         //when button x is pressed on gamepad 2 lift angle increases
         if (gamepad2.x){
             liftUp();
@@ -86,6 +85,35 @@ public class TeleOpLance extends RobotHardware2016 {
         //when b and x are not pressed stop lift angle motor
         else {
             liftStop();
+
         }
+        //when dpad left is pressed the left basket wing extends
+        if (gamepad2.dpad_left){
+            rightWingOut();
+        }
+        //when dpad right is pressed the right basket wing extends
+        else if (gamepad2.dpad_right){
+                leftWingOut();
+        }
+        //if neither game pad buttons are pressed the wings stay in the starting position
+        else {
+            rightWingIn();
+            leftWingIn();
+        }
+        //when dpad up is pressed the dino arms go up
+        if (gamepad2.dpad_up){
+            dinoUp();
+        }
+        //when dpad down is pressed the dino arms go down
+        else if (gamepad2.dpad_down){
+            dinoDown();
+        }
+        telemetry.addData("right bumper",gamepad2.right_bumper);
+        telemetry.addData("left bumper",gamepad2.left_bumper);
+        telemetry.addData("dpad left",gamepad2.dpad_left);
+        telemetry.addData("dpad right",gamepad2.dpad_right);
+
+
+
     }
 }
