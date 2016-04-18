@@ -19,17 +19,17 @@ public class RobotHardware2016 extends OpMode{
     protected final static double BASKET_MID_RANGE  = 0.45;
     protected final static double BASKET_MAX_RANGE  = 1.00;
 
-    protected final static double LWING_MIN_RANGE  = 0.60;
-    protected final static double LWING_MAX_RANGE  = 0.00;
+    protected final static double LWING_MIN_RANGE  = 0.00;
+    protected final static double LWING_MAX_RANGE  = 0.60;
 
-    protected final static double RWING_MIN_RANGE  = 0.30;
-    protected final static double RWING_MAX_RANGE  = 0.90;
+    protected final static double RWING_MIN_RANGE  = 0.80;
+    protected final static double RWING_MAX_RANGE  = 0.00;
 
-    protected final static double LDINO_MIN_RANGE = 0.20;
-    protected final static double LDINO_MAX_RANGE = 0.90;
+    protected final static double LDINO_MIN_RANGE = 0.90;
+    protected final static double LDINO_MAX_RANGE = 0.20;
 
-    protected final static double RDINO_MIN_RANGE = 0.60;
-    protected final static double RDINO_MAX_RANGE = 0.00;
+    protected final static double RDINO_MIN_RANGE = 0.00;
+    protected final static double RDINO_MAX_RANGE = 0.60;
 
     //define Motors and MotorControllers
     private DcMotorController rightMotorController;
@@ -98,12 +98,13 @@ public class RobotHardware2016 extends OpMode{
 
         middleBasket();
 
-        rightDino.setPosition(Servo.MAX_POSITION);
 
+        //initial position for start of round
         basket.setPosition(BASKET_MID_RANGE);
 
         rightWingIn();
         leftWingIn();
+        dinoUp();
 
         hardwareMap.logDevices();
 
@@ -116,6 +117,7 @@ public class RobotHardware2016 extends OpMode{
     }
 
     //setters and getters for all motors for use outside this program
+    //above 0= forward, below 0= backward, 0= not moving
     //right set
     public void setRightMotors(double power){
         rightFrontMotor.setPower(.9*power);
@@ -203,6 +205,7 @@ public class RobotHardware2016 extends OpMode{
     public void stoplift() {
         lift1.setPower(0);
         lift2.setPower(0);
+        angleMotor.setPower(0);
     }
 
     //lift angle up

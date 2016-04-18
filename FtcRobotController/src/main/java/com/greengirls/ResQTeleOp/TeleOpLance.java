@@ -60,12 +60,12 @@ public class TeleOpLance extends RobotHardware2016 {
         }
 
         //When button y is pressed on game pad 2 the lift extends
-        if (gamepad2.a){
+        if (gamepad2.b){
             liftOut();
             //coilOut();
         }
         //When button a is pressed on game pad 2 the lift retracts
-        else if (gamepad2.y){
+        else if (gamepad2.x){
             liftIn();
             //coilIn();
         }
@@ -75,11 +75,11 @@ public class TeleOpLance extends RobotHardware2016 {
             //coilStop();
         }
         //when button x is pressed on gamepad 2 lift angle increases
-        if (gamepad2.x){
+        if (gamepad2.y){
             liftUp();
         }
         //when button b is pressed on gamepad 2 lift angle decreases
-        else if (gamepad2.b){
+        else if (gamepad2.a){
             liftDown();
         }
         //when b and x are not pressed stop lift angle motor
@@ -101,11 +101,11 @@ public class TeleOpLance extends RobotHardware2016 {
             leftWingIn();
         }
         //when dpad up is pressed the dino arms go up
-        if (gamepad2.dpad_up){
+        if (gamepad2.dpad_down){
             dinoUp();
         }
         //when dpad down is pressed the dino arms go down
-        else if (gamepad2.dpad_down){
+        else if (gamepad2.dpad_up){
             dinoDown();
         }
         telemetry.addData("right bumper",gamepad2.right_bumper);

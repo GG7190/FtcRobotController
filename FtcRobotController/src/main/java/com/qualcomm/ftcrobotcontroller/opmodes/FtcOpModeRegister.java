@@ -33,7 +33,10 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.greengirls.ResQAuto.ArmAutoFloorLance;
 import com.greengirls.ResQAuto.AutoFloorLance;
+import com.greengirls.ResQAuto.ColorAutoBlueTEST;
 import com.greengirls.ResQAuto.ColorAutoLanceBlue;
+import com.greengirls.ResQAuto.ColorAutoRedTEST;
+import com.greengirls.ResQAuto.FloorArmToZone;
 import com.greengirls.ResQAuto.ServoTest;
 import com.greengirls.ResQTeleOp.TeleOpLance;
 import com.greengirls.chinaAutonomous.RampToParking;
@@ -64,12 +67,13 @@ public class FtcOpModeRegister implements OpModeRegister {
      */
 
     manager.register("NullOp", NullOp.class);
-    manager.register("ColorAutoLanceBlue", ColorAutoLanceBlue.class);
     manager.register("TeleOpLance", TeleOpLance.class);
-    manager.register("AutoFloorLance", AutoFloorLance.class);
-    manager.register("ServoTest", ServoTest.class);
-    manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
+   // manager.register("ServoTest", ServoTest.class);
+    //manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
     manager.register("ArmAutoFloorLance", ArmAutoFloorLance.class);
+    manager.register("ColorAutoBlueTEST", ColorAutoBlueTEST.class);
+    manager.register("ColorAutoRedTEST", ColorAutoRedTEST.class);
+    //manager.register("FloorArmToZone", FloorArmToZone.class);
 
 
     /*
